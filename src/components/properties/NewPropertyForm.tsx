@@ -28,7 +28,8 @@ export function NewPropertyForm({ organizationId, userId }: { organizationId: st
   const supabase = createClient();
 
   const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof propertySchema>>({
-    resolver: zodResolver(propertySchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(propertySchema) as any,
     defaultValues: { type: 'apartment', status: 'available' }
   });
 

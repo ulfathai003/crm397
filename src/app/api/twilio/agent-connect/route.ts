@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   const response = new VoiceResponse();
 
   const gather = response.gather({
-    numDigits: '1',
+    numDigits: 1,
     action: `/api/twilio/agent-accept?callId=${callId}&leadId=${leadId}`,
     method: 'POST',
     timeout: 15,
