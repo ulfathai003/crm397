@@ -81,7 +81,7 @@
 
   /* KPI Cards */
   .kpi-card {
-    @apply card p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5;
+    background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: var(--radius); @apply p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5;
   }
 
   /* Gradient backgrounds for stats */
