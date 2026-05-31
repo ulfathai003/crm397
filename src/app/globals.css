@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 217 91% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 152 69% 31%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 30%;
+    --radius: 0.75rem;
+    --sidebar-width: 260px;
+    --header-height: 64px;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 20% 96%;
+    --card: 222 47% 10%;
+    --card-foreground: 210 20% 96%;
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 217 91% 55%;
+    --primary-foreground: 222 47% 7%;
+    --secondary: 152 69% 42%;
+    --secondary-foreground: 222 47% 7%;
+    --muted: 222 47% 14%;
+    --muted-foreground: 215 16% 64%;
+    --accent: 38 92% 55%;
+    --accent-foreground: 222 47% 7%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 47% 18%;
+    --input: 222 47% 18%;
+    --ring: 217 91% 55%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  input, textarea, select {
+    outline: none;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--muted)); }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+}
+
+@layer components {
+  /* Card styles */
+  .card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+
+  /* KPI Cards */
+  .kpi-card {
+    @apply card p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5;
+  }
+
+  /* Gradient backgrounds for stats */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(217, 91%, 30%), hsl(217, 91%, 45%));
+  }
+  .gradient-secondary {
+    background: linear-gradient(135deg, hsl(152, 69%, 31%), hsl(152, 69%, 45%));
+  }
+  .gradient-accent {
+    background: linear-gradient(135deg, hsl(38, 92%, 45%), hsl(38, 92%, 60%));
+  }
+  .gradient-danger {
+    background: linear-gradient(135deg, hsl(0, 84%, 55%), hsl(0, 84%, 70%));
+  }
+
+  /* Lead temperature badges */
+  .badge-hot { @apply bg-red-100 text-red-700 border border-red-200; }
+  .badge-warm { @apply bg-orange-100 text-orange-700 border border-orange-200; }
+  .badge-cold { @apply bg-blue-100 text-blue-700 border border-blue-200; }
+
+  /* Status badges */
+  .badge-new { @apply bg-indigo-100 text-indigo-700; }
+  .badge-contacted { @apply bg-sky-100 text-sky-700; }
+  .badge-qualified { @apply bg-cyan-100 text-cyan-700; }
+  .badge-proposal { @apply bg-yellow-100 text-yellow-700; }
+  .badge-negotiation { @apply bg-orange-100 text-orange-700; }
+  .badge-won { @apply bg-green-100 text-green-700; }
+  .badge-lost { @apply bg-red-100 text-red-700; }
+
+  /* Mobile-first sidebar overlay */
+  .sidebar-overlay {
+    @apply fixed inset-0 bg-black/50 z-40 lg:hidden;
+  }
+
+  /* Table styles */
+  .table-header {
+    @apply bg-muted/50 text-xs font-semibold text-muted-foreground uppercase tracking-wider;
+  }
+
+  /* Animated elements */
+  .animate-slide-in {
+    animation: slideIn 0.2s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(-10px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pulse animation for live indicators */
+  .live-indicator {
+    @apply relative flex h-2 w-2;
+  }
+  .live-indicator::before {
+    @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75;
+    content: '';
+  }
+  .live-indicator::after {
+    @apply relative inline-flex rounded-full h-2 w-2 bg-green-500;
+    content: '';
+  }
+
+  /* Bottom nav for mobile */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-card border-t border-border z-30 lg:hidden;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
